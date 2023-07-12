@@ -1,6 +1,6 @@
 package org.example.dataStructure;
 
-public class SingleLinkedList {
+public class SingleLinkedListDemo {
 
 
 }
