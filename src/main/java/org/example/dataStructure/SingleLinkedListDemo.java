@@ -43,7 +43,16 @@ public class SingleLinkedListDemo {
 //		reversetListNew(singleLinkedList2);
 //        singleLinkedList2.showList();
         //测试逆序打印
-        reversePrint(singleLinkedList2);
+//        reversePrint(singleLinkedList2);
+        //测试链表合并
+        HeroNode heroNode6 = new HeroNode(6, "秦明", "霹雳火");
+        SingleLinkedList singleLinkedList3 = new SingleLinkedList();
+        singleLinkedList3.addByOrder(heroNode4);
+        singleLinkedList3.addByOrder(heroNode6);
+        singleLinkedList3.showList();
+        System.out.println("链表合并结果：");
+        mergeLinkedList(singleLinkedList2,singleLinkedList3).showList();
+
     }
 
     //查找单链表中的倒数第k个结点 【新浪面试题】
@@ -171,6 +180,7 @@ public class SingleLinkedListDemo {
 
     //将两个有序链表合并，合并后的链表依旧有序
     //自己的思路，以较长的链表为基础，遍历较短链表，将其插入长链表
+    //存在的问题是：两个链表的节点关系需要保持一致，不能出现链表1：2>4>6，链表2:2>6这种。
     public static SingleLinkedList mergeLinkedList(SingleLinkedList singleLinkedList1, SingleLinkedList singleLinkedList2) {
         // 判断两个链表是否都为空或其中一个为空
         HeroNode head1 = singleLinkedList1.getHead();
@@ -192,20 +202,26 @@ public class SingleLinkedListDemo {
         head.next = length1 >= length2? head1.next : head2.next;
         HeroNode longTemp = head;
         HeroNode shortTemp = length1 >= length2? head2.next : head1.next;
+        Boolean existFlag = false;
         // 遍历短链表，并将其顺序插入长链表。若长链表中已存在节点，则不插入该节点
         while (shortTemp !=null){
             while (longTemp.next != null){
                 if (shortTemp.id < longTemp.next.id){
-                    // 插入
-                    shortTemp.next = longTemp.next;
-                    longTemp.next = shortTemp;
                     break;
                 }
                 if (shortTemp.id == longTemp.next.id){
                     // 不插入该节点
+                    existFlag = true;
                     break;
                 }
+                longTemp = longTemp.next;
             }
+            if (!existFlag){
+                // 插入
+                shortTemp.next = longTemp.next;
+                longTemp.next = shortTemp;
+            }
+            shortTemp = shortTemp.next;
         }
         // 输出长链表
         return newSingleLinkedList;
@@ -224,6 +240,10 @@ class SingleLinkedList{
     //返回头节点
     public HeroNode getHead() {
         return head;
+    }
+    //设置头节点
+    public void setHead(HeroNode head){
+        this.head = head;
     }
 
     // 添加节点，当不考虑编号的顺序时，找到当前链表的最后节点，将最后这个节点测next指向新节点
