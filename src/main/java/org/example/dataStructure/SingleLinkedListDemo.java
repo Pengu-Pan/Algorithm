@@ -46,8 +46,9 @@ public class SingleLinkedListDemo {
 //        reversePrint(singleLinkedList2);
         //测试链表合并
         HeroNode heroNode6 = new HeroNode(6, "秦明", "霹雳火");
+        HeroNode heroNode22 = new HeroNode(2, "卢俊义", "玉麒麟");
         SingleLinkedList singleLinkedList3 = new SingleLinkedList();
-        singleLinkedList3.addByOrder(heroNode4);
+        singleLinkedList3.addByOrder(heroNode22);
         singleLinkedList3.addByOrder(heroNode6);
         singleLinkedList3.showList();
         System.out.println("链表合并结果：");
@@ -201,27 +202,29 @@ public class SingleLinkedListDemo {
         HeroNode head = newSingleLinkedList.getHead();
         head.next = length1 >= length2? head1.next : head2.next;
         HeroNode longTemp = head;
-        HeroNode shortTemp = length1 >= length2? head2.next : head1.next;
-        Boolean existFlag = false;
+        HeroNode loopTemp = length1 >= length2? head2.next : head1.next;
+//        Boolean existFlag = false;
         // 遍历短链表，并将其顺序插入长链表。若长链表中已存在节点，则不插入该节点
-        while (shortTemp !=null){
+        while (loopTemp !=null){
+            HeroNode shortTemp = loopTemp;
+            loopTemp = loopTemp.next;
             while (longTemp.next != null){
-                if (shortTemp.id < longTemp.next.id){
+                if (shortTemp.id <= longTemp.next.id){
                     break;
                 }
-                if (shortTemp.id == longTemp.next.id){
-                    // 不插入该节点
-                    existFlag = true;
-                    break;
-                }
+//                if (shortTemp.id == longTemp.next.id){
+//                    // 不插入该节点
+//                    existFlag = true;
+//                    break;
+//                }
                 longTemp = longTemp.next;
             }
-            if (!existFlag){
+//            if (!existFlag){
                 // 插入
-                shortTemp.next = longTemp.next;
-                longTemp.next = shortTemp;
-            }
-            shortTemp = shortTemp.next;
+            shortTemp.next = longTemp.next;
+            longTemp.next = shortTemp;
+//            }
+
         }
         // 输出长链表
         return newSingleLinkedList;
