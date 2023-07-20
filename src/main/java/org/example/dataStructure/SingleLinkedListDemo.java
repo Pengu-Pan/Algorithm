@@ -307,9 +307,7 @@ class SingleLinkedList{
             if(temp.id == newHeroNode.id){
                 //修改
                 flag = true;
-                temp.name = newHeroNode.name;
-                temp.nickname = newHeroNode.nickname;
-
+                break;
             }
             temp = temp.next;
         }
@@ -317,6 +315,9 @@ class SingleLinkedList{
             System.out.printf("未找到编号为%d的节点，不能修改",newHeroNode.id);
             return;
         }
+        // 如果找到了则修改节点
+        temp.name = newHeroNode.name;
+        temp.nickname = newHeroNode.nickname;
     }
 
     //删除节点
@@ -331,7 +332,7 @@ class SingleLinkedList{
             }
             if(id == temp.next.id){
                 flag = true;
-                temp.next = temp.next.next;
+                break;
             }
             temp = temp.next;
         }
@@ -340,6 +341,8 @@ class SingleLinkedList{
             System.out.printf("未找到编号为%d的节点，不能修改",id);
             return;
         }
+        //如果找到了则修改节点
+        temp.next = temp.next.next;
     }
 
 
