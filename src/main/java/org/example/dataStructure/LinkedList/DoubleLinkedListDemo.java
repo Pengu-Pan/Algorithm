@@ -1,4 +1,4 @@
-package org.example.dataStructure;
+package org.example.dataStructure.LinkedList;
 
 public class DoubleLinkedListDemo {
     public static void main(String[] args) {

@@ -1,7 +1,6 @@
-package org.example.dataStructure;
+package org.example.dataStructure.LinkedList;
 
 import java.util.Stack;
-import java.util.concurrent.ThreadPoolExecutor;
 
 public class SingleLinkedListDemo {
     public static void main(String[] args) {
