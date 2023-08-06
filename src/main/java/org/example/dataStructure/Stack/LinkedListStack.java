@@ -54,7 +54,7 @@ class Stack{
     private int top = -1;// top用于表示栈顶的位置，初始化为-1,最大为maxSize -1
 
     // 构造器
-    public Stack(int maxSize) {
+    public Stack() {
         this.maxSize = maxSize;
         head = null;
     }
